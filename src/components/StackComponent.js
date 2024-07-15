@@ -2,7 +2,7 @@ import React, { Component,useEffect } from "react";
 import Stack from "../utils/Stack";
 import "../StackComponent.css";
 
-class StackComponent extends Component {
+class StackComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,7 +10,20 @@ class StackComponent extends Component {
     };
   }
 
-  
+  componentDidMount() {
+    if(this.props.setCallables1){
+      this.props.setCallables1({
+        handlePush: this.handlePush,
+        handlePop:this.handlePop
+      });
+    }
+    if(this.props.setCallables2){
+      this.props.setCallables2({
+        handlePush: this.handlePush,
+        handlePop:this.handlePop
+      });
+    }
+  }
 
   handlePush = (event) => {
     event.preventDefault();
@@ -36,28 +49,7 @@ class StackComponent extends Component {
 
   render() {
     return (
-      <div className="stack-container" ref={this.props.innerRef} >
-        {/* <h1 className="stack-title">Stack Data Structure</h1> */}
-        <form>
-          {/* <input
-            type="text"
-            ref="input"
-            className="stack-input"
-            placeholder="Enter a value to push to the stack"
-          /> */}
-          <div className="stack-buttons">
-            <button
-              className="stack-button push-button" style={{zIndex:-1}}
-              onClick={this.handlePush}
-            >
-            </button>
-            <button
-              className="stack-button pop-button" style={{zIndex:-1}}
-              onClick={this.handlePop}
-            >
-            </button>
-          </div>
-        </form>
+      <div className="stack-container" ref={this.props.innerRef}>
 
         <h3>Score Board:</h3>
         <div className="stack-stats">
